@@ -1,0 +1,31 @@
+{
+  "name": "funeral-front",
+  "version": "1.0.0",
+  "private": true,
+  "description": "funeral-front",
+  "author": "Colton Plumley",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "downloadjs": "^1.4.7",
+    "gatsby": "^2.26.1",
+    "gatsby-plugin-google-fonts": "^1.0.1",
+    "gatsby-plugin-react-helmet": "^3.8.0",
+    "gatsby-plugin-sharp": "^2.12.1",
+    "gatsby-source-filesystem": "^2.9.0",
+    "gatsby-source-wordpress-experimental": "^7.0.0",
+    "gatsby-transformer-sharp": "^2.10.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0"
+  }
+}
