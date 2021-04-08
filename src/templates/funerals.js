@@ -1,10 +1,11 @@
+import download from "downloadjs";
 import React from "react"
-
 import Layout from "../components/layout"
 
-export default ({ data, pageContext }) => (
+require("downloadjs");
+
+export default ({ pageContext }) => (
   <Layout title={pageContext.title}>
-    { console.log(pageContext) }
       <h1 style={{ 
         textAlign: `center`, 
         fontFamily: `great vibes`,
@@ -18,9 +19,10 @@ export default ({ data, pageContext }) => (
         <source src={pageContext.funeralUrl} />
       </video>
       
-      <a
-        href={"https://cors-anywhere.herokuapp.com/" + pageContext.funeralUrl}
-        onClick={ console.log(`testing`) }
+      <button
+        onClick={ () => {
+          download(pageContext.funeralUrl);
+        } }
         style={{
           textDecoration: `none`,
           fontFamily: `helvetica`,
@@ -33,8 +35,6 @@ export default ({ data, pageContext }) => (
           border: `none`,
           cursor: `pointer`,
         }}
-        target="_blank"
-        download
-      >Download</a>
+      >Download</button>
   </Layout>
 )

@@ -4,12 +4,9 @@ import { BrowserRouter, Route } from "react-router-dom";
 // markup
 const IndexPage = () => {
   return (
-    <BrowserRouter>
-      <Route path='/' component={() => {
-        window.location.href = 'https://olivebaptist.org/funeral';
-        return null;
-      }} />
-    </BrowserRouter>
+    <main>
+      <h1>Testing</h1>
+    </main>
   )
 }
 
