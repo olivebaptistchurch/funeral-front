@@ -1,11 +1,18 @@
 // import download from "downloadjs";
-import React from "react"
+import React, { useState } from "react"
 import Layout from "../components/layout"
+import Loader from "react-spinners/PulseLoader";
+import { css } from "@emotion/react";
 
 // require("downloadjs");
 
-function download(url) {
-  console.log("In download function")
+const loader = css`
+  position: absolute;
+  top: calc(50% - 50px);
+`
+
+function download(url, setLoading) {
+  setLoading(1)
   fetch(url, {
             method: 'GET',
         })
@@ -18,11 +25,14 @@ function download(url) {
             document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
             a.click();    
             a.remove();  //afterwards we remove the element again         
+            setLoading(0);
         });
 }
 
-export default ({ pageContext }) => (
-  <Layout title={pageContext.title}>
+export default ({ pageContext }) => {
+  const [loading, setLoading] = useState(0);
+  
+  return (<Layout title={pageContext.title}>
       <h1 style={{ 
         textAlign: `center`, 
         fontFamily: `great vibes`,
@@ -35,12 +45,13 @@ export default ({ pageContext }) => (
       <video controls style={{ width: `100%`, marginBottom: `2rem` }} poster={pageContext.thumbnailUrl} >
         <source src={pageContext.funeralUrl} />
       </video>
+
+      <div className="overlay" style={ loading ? { display: 'block' } : { display: 'none' } }>
+        <h3 style={{position: 'relative', top: 'calc(50% - 100px)', left: '15px', zIndex: '20000', color: 'white' }}>Downloading Video</h3>
+        <Loader loading={loading} css={loader} color="white" speedMultiplier={.75} />
+      </div>
       
-      <a 
-        // href={
-        //   pageContext.funeralUrl
-        // }
-        onClick={ () => download(pageContext.funeralUrl) }
+      <a onClick={ () => download(pageContext.funeralUrl, setLoading) }
         style={{
           textDecoration: `none`,
           fontFamily: `helvetica`,
@@ -55,5 +66,5 @@ export default ({ pageContext }) => (
         }}
         // download="test.mp4"
       >Download</a>
-  </Layout>
-)
+  </Layout>)
+}
