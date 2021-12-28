@@ -11,7 +11,7 @@ const loader = css`
   top: calc(50% - 50px);
 `
 
-function download(url, setLoading) {
+function download(url, title, setLoading) {
   setLoading(1)
   fetch(url, {
             method: 'GET',
@@ -21,7 +21,7 @@ function download(url, setLoading) {
             var url = window.URL.createObjectURL(blob);
             var a = document.createElement('a');
             a.href = url;
-            a.download = "test.mp4";
+            a.download = `${title.replace(/\s/g , "-")}.mp4`;
             document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
             a.click();    
             a.remove();  //afterwards we remove the element again         
@@ -31,7 +31,6 @@ function download(url, setLoading) {
 
 export default ({ pageContext }) => {
   const [loading, setLoading] = useState(0);
-  
   return (<Layout title={pageContext.title}>
       <h1 style={{ 
         textAlign: `center`, 
@@ -51,7 +50,7 @@ export default ({ pageContext }) => {
         <Loader loading={loading} css={loader} color="white" speedMultiplier={.75} />
       </div>
       
-      <a onClick={ () => download(pageContext.funeralUrl, setLoading) }
+      <a onClick={ () => download(pageContext.funeralUrl, pageContext.title, setLoading) }
         style={{
           textDecoration: `none`,
           fontFamily: `helvetica`,
